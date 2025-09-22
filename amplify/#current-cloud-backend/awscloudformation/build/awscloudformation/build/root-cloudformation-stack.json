@@ -247,57 +247,6 @@
       "Properties": {
         "TemplateURL": "https://s3.amazonaws.com/amplify-tdhvacooksocial-dev-6366a-deployment/amplify-cfn-templates/auth/tdhvacooksocial68f63ad968f63ad9-cloudformation-template.json",
         "Parameters": {
-          "identityPoolName": "tdhvacooksocial68f63ad9_identitypool_68f63ad9",
-          "allowUnauthenticatedIdentities": false,
-          "resourceNameTruncated": "tdhvac68f63ad9",
-          "userPoolName": "tdhvacooksocial68f63ad9_userpool_68f63ad9",
-          "autoVerifiedAttributes": "",
-          "mfaConfiguration": "OFF",
-          "mfaTypes": "SMS Text Message",
-          "smsAuthenticationMessage": "Your authentication code is {####}",
-          "smsVerificationMessage": "Your verification code is {####}",
-          "emailVerificationSubject": "Your verification code",
-          "emailVerificationMessage": "Your verification code is {####}",
-          "defaultPasswordPolicy": false,
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": "",
-          "requiredAttributes": "birthdate,gender,preferred_username",
-          "aliasAttributes": "",
-          "userpoolClientGenerateSecret": false,
-          "userpoolClientRefreshTokenValidity": 30,
-          "userpoolClientWriteAttributes": "email,phone_number,birthdate,gender,preferred_username",
-          "userpoolClientReadAttributes": "birthdate,email,gender,phone_number,preferred_username",
-          "userpoolClientLambdaRole": "tdhvac68f63ad9_userpoolclient_lambda_role",
-          "userpoolClientSetAttributes": true,
-          "sharedId": "68f63ad9",
-          "resourceName": "tdhvacooksocial68f63ad968f63ad9",
-          "authSelections": "identityPoolAndUserPool",
-          "useDefault": "manual",
-          "thirdPartyAuth": false,
-          "userPoolGroups": false,
-          "adminQueries": false,
-          "triggers": "{\"PostConfirmation\":[\"custom\"]}",
-          "hostedUI": false,
-          "userPoolGroupList": "",
-          "serviceName": "Cognito",
-          "usernameCaseSensitive": false,
-          "useEnabledMfas": true,
-          "authRoleArn": {
-            "Fn::GetAtt": [
-              "AuthRole",
-              "Arn"
-            ]
-          },
-          "unauthRoleArn": {
-            "Fn::GetAtt": [
-              "UnauthRole",
-              "Arn"
-            ]
-          },
-          "breakCircularDependency": true,
-          "dependsOn": "[object Object]",
-          "permissions": "",
-          "authTriggerConnections": "{\"triggerType\":\"PostConfirmation\",\"lambdaFunctionName\":\"tdhvacooksocial68f63ad968f63ad9PostConfirmation\"}",
           "env": "dev"
         }
       }
@@ -307,8 +256,6 @@
       "Properties": {
         "TemplateURL": "https://s3.amazonaws.com/amplify-tdhvacooksocial-dev-6366a-deployment/amplify-cfn-templates/function/tdhvacooksocial68f63ad968f63ad9PostConfirmation-cloudformation-template.json",
         "Parameters": {
-          "modules": "custom",
-          "resourceName": "tdhvacooksocial68f63ad968f63ad9PostConfirmation",
           "deploymentBucketName": "amplify-tdhvacooksocial-dev-6366a-deployment",
           "s3Key": "amplify-builds/tdhvacooksocial68f63ad968f63ad9PostConfirmation-4455626b70316f667458-build.zip",
           "env": "dev"
@@ -320,9 +267,6 @@
       "Properties": {
         "TemplateURL": "https://s3.amazonaws.com/amplify-tdhvacooksocial-dev-6366a-deployment/amplify-cfn-templates/storage/UserProfiles-cloudformation-template.json",
         "Parameters": {
-          "tableName": "UserProfiles",
-          "partitionKeyName": "userId",
-          "partitionKeyType": "S",
           "env": "dev"
         }
       }
@@ -332,212 +276,8 @@
       "Properties": {
         "TemplateURL": "https://s3.amazonaws.com/amplify-tdhvacooksocial-dev-6366a-deployment/amplify-cfn-templates/hosting/template.json",
         "Parameters": {
-          "bucketName": "tdhvacooksocial",
           "env": "dev"
         }
-      }
-    },
-    "UpdateRolesWithIDPFunction": {
-      "DependsOn": [
-        "AuthRole",
-        "UnauthRole",
-        "authtdhvacooksocial68f63ad968f63ad9"
-      ],
-      "Type": "AWS::Lambda::Function",
-      "Properties": {
-        "Code": {
-          "ZipFile": {
-            "Fn::Join": [
-              "\n",
-              [
-                "const response = require('cfn-response');",
-                "const { IAMClient, GetRoleCommand, UpdateAssumeRolePolicyCommand } = require('@aws-sdk/client-iam');",
-                "exports.handler = function(event, context) {",
-                "    // Don't return promise, response.send() marks context as done internally",
-                "    const ignoredPromise = handleEvent(event, context)",
-                "};",
-                "async function handleEvent(event, context) {",
-                "    try {",
-                "        let authRoleName = event.ResourceProperties.authRoleName;",
-                "        let unauthRoleName = event.ResourceProperties.unauthRoleName;",
-                "        let idpId = event.ResourceProperties.idpId;",
-                "        let authParamsJson = {",
-                "            'Version': '2012-10-17',",
-                "            'Statement': [{",
-                "                'Effect': 'Allow',",
-                "                'Principal': {'Federated': 'cognito-identity.amazonaws.com'},",
-                "                'Action': 'sts:AssumeRoleWithWebIdentity',",
-                "                'Condition': {",
-                "                    'StringEquals': {'cognito-identity.amazonaws.com:aud': idpId},",
-                "                    'ForAnyValue:StringLike': {'cognito-identity.amazonaws.com:amr': 'authenticated'}",
-                "                }",
-                "            }]",
-                "        };",
-                "        let unauthParamsJson = {",
-                "            'Version': '2012-10-17',",
-                "            'Statement': [{",
-                "                'Effect': 'Allow',",
-                "                'Principal': {'Federated': 'cognito-identity.amazonaws.com'},",
-                "                'Action': 'sts:AssumeRoleWithWebIdentity',",
-                "                'Condition': {",
-                "                    'StringEquals': {'cognito-identity.amazonaws.com:aud': idpId},",
-                "                    'ForAnyValue:StringLike': {'cognito-identity.amazonaws.com:amr': 'unauthenticated'}",
-                "                }",
-                "            }]",
-                "        };",
-                "        if (event.RequestType === 'Delete') {",
-                "            try {",
-                "                delete authParamsJson.Statement[0].Condition;",
-                "                delete unauthParamsJson.Statement[0].Condition;",
-                "                authParamsJson.Statement[0].Effect = 'Deny'",
-                "                unauthParamsJson.Statement[0].Effect = 'Deny'",
-                "                let authParams = {PolicyDocument: JSON.stringify(authParamsJson), RoleName: authRoleName};",
-                "                let unauthParams = {PolicyDocument: JSON.stringify(unauthParamsJson), RoleName: unauthRoleName};",
-                "                const iam = new IAMClient({region: event.ResourceProperties.region});",
-                "                let res = await Promise.all([",
-                "                    iam.send(new GetRoleCommand({RoleName: authParams.RoleName})),",
-                "                    iam.send(new GetRoleCommand({RoleName: unauthParams.RoleName}))",
-                "                ]);",
-                "                res = await Promise.all([",
-                "                    iam.send(new UpdateAssumeRolePolicyCommand(authParams)),",
-                "                    iam.send(new UpdateAssumeRolePolicyCommand(unauthParams))",
-                "                ]);",
-                "                response.send(event, context, response.SUCCESS, {});",
-                "            } catch (err) {",
-                "                console.log(err.stack);",
-                "                response.send(event, context, response.SUCCESS, {Error: err});",
-                "            }",
-                "        } else if (event.RequestType === 'Update' || event.RequestType === 'Create') {",
-                "            const iam = new IAMClient({region: event.ResourceProperties.region});",
-                "            let authParams = {PolicyDocument: JSON.stringify(authParamsJson), RoleName: authRoleName};",
-                "            let unauthParams = {PolicyDocument: JSON.stringify(unauthParamsJson), RoleName: unauthRoleName};",
-                "            const res = await Promise.all([",
-                "                iam.send(new UpdateAssumeRolePolicyCommand(authParams)),",
-                "                iam.send(new UpdateAssumeRolePolicyCommand(unauthParams))",
-                "            ]);",
-                "            response.send(event, context, response.SUCCESS, {});",
-                "        }",
-                "    } catch (err) {",
-                "        console.log(err.stack);",
-                "        response.send(event, context, response.FAILED, {Error: err});",
-                "    }",
-                "};"
-              ]
-            ]
-          }
-        },
-        "Handler": "index.handler",
-        "Runtime": "nodejs22.x",
-        "Timeout": 300,
-        "Role": {
-          "Fn::GetAtt": [
-            "UpdateRolesWithIDPFunctionRole",
-            "Arn"
-          ]
-        }
-      }
-    },
-    "UpdateRolesWithIDPFunctionOutputs": {
-      "Type": "Custom::LambdaCallout",
-      "Properties": {
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "UpdateRolesWithIDPFunction",
-            "Arn"
-          ]
-        },
-        "region": {
-          "Ref": "AWS::Region"
-        },
-        "idpId": {
-          "Fn::GetAtt": [
-            "authtdhvacooksocial68f63ad968f63ad9",
-            "Outputs.IdentityPoolId"
-          ]
-        },
-        "authRoleName": {
-          "Ref": "AuthRole"
-        },
-        "unauthRoleName": {
-          "Ref": "UnauthRole"
-        }
-      }
-    },
-    "UpdateRolesWithIDPFunctionRole": {
-      "Type": "AWS::IAM::Role",
-      "Properties": {
-        "RoleName": {
-          "Fn::Join": [
-            "",
-            [
-              {
-                "Ref": "AuthRole"
-              },
-              "-idp"
-            ]
-          ]
-        },
-        "AssumeRolePolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Principal": {
-                "Service": [
-                  "lambda.amazonaws.com"
-                ]
-              },
-              "Action": [
-                "sts:AssumeRole"
-              ]
-            }
-          ]
-        },
-        "Policies": [
-          {
-            "PolicyName": "UpdateRolesWithIDPFunctionPolicy",
-            "PolicyDocument": {
-              "Version": "2012-10-17",
-              "Statement": [
-                {
-                  "Effect": "Allow",
-                  "Action": [
-                    "logs:CreateLogGroup",
-                    "logs:CreateLogStream",
-                    "logs:PutLogEvents"
-                  ],
-                  "Resource": "arn:aws:logs:*:*:*"
-                },
-                {
-                  "Effect": "Allow",
-                  "Action": [
-                    "iam:UpdateAssumeRolePolicy",
-                    "iam:GetRole"
-                  ],
-                  "Resource": {
-                    "Fn::GetAtt": [
-                      "AuthRole",
-                      "Arn"
-                    ]
-                  }
-                },
-                {
-                  "Effect": "Allow",
-                  "Action": [
-                    "iam:UpdateAssumeRolePolicy",
-                    "iam:GetRole"
-                  ],
-                  "Resource": {
-                    "Fn::GetAtt": [
-                      "UnauthRole",
-                      "Arn"
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
       }
     }
   }

@@ -51,7 +51,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-tdhvacooksocial-dev-6366a-deployment/amplify-cfn-templates/auth/tdhvacooksocial68f63ad968f63ad9-cloudformation-template.json",
         "logicalId": "authtdhvacooksocial68f63ad968f63ad9"
       },
-      "lastPushTimeStamp": "2025-09-22T17:45:34.877Z",
+      "lastPushTimeStamp": "2025-09-22T21:53:17.563Z",
       "output": {
         "UserPoolId": "us-east-1_h977IACjz",
         "AppClientIDWeb": "4v66hnomtqvg5l0endqvpgvdo3",
@@ -68,9 +68,9 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
-      "lastBuildTimeStamp": "2025-09-22T17:43:59.023Z",
+      "lastBuildTimeStamp": "2025-09-22T21:52:54.303Z",
       "lastBuildType": "PROD",
-      "lastPackageTimeStamp": "2025-09-22T17:44:01.078Z",
+      "lastPackageTimeStamp": "2025-09-22T21:52:56.294Z",
       "distZipFilename": "tdhvacooksocial68f63ad968f63ad9PostConfirmation-4455626b70316f667458-build.zip",
       "s3Bucket": {
         "deploymentBucketName": "amplify-tdhvacooksocial-dev-6366a-deployment",
@@ -80,7 +80,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-tdhvacooksocial-dev-6366a-deployment/amplify-cfn-templates/function/tdhvacooksocial68f63ad968f63ad9PostConfirmation-cloudformation-template.json",
         "logicalId": "functiontdhvacooksocial68f63ad968f63ad9PostConfirmation"
       },
-      "lastPushTimeStamp": "2025-09-22T17:45:34.879Z",
+      "lastPushTimeStamp": "2025-09-22T21:53:17.569Z",
       "output": {
         "LambdaExecutionRoleArn": "arn:aws:iam::285956107606:role/tdhvacooksocial68f63ad968f63ad9PostConfirmation-dev",
         "Region": "us-east-1",
@@ -117,7 +117,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-tdhvacooksocial-dev-6366a-deployment/amplify-cfn-templates/hosting/template.json",
         "logicalId": "hostingS3AndCloudFront"
       },
-      "lastPushTimeStamp": "2025-09-22T17:45:34.880Z",
+      "lastPushTimeStamp": "2025-09-22T21:53:17.857Z",
       "output": {
         "CloudFrontSecureURL": "https://d2ovxpyl6b7ihm.cloudfront.net",
         "S3BucketSecureURL": "https://tdhvacooksocial-dev.s3.amazonaws.com",

@@ -320,9 +320,6 @@
       "Properties": {
         "TemplateURL": "https://s3.amazonaws.com/amplify-tdhvacooksocial-dev-6366a-deployment/amplify-cfn-templates/storage/UserProfiles-cloudformation-template.json",
         "Parameters": {
-          "tableName": "UserProfiles",
-          "partitionKeyName": "userId",
-          "partitionKeyType": "S",
           "env": "dev"
         }
       }

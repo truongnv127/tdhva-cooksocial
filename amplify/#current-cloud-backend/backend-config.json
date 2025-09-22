@@ -1,75 +1,60 @@
 {
   "auth": {
-    "tdhvacooksocial68f63ad968f63ad9": {
+    "tdhvacooksocial": {
       "customAuth": false,
-      "dependsOn": [
-        {
-          "attributes": [
-            "Arn",
-            "Name"
-          ],
-          "category": "function",
-          "resourceName": "tdhvacooksocial68f63ad968f63ad9PostConfirmation",
-          "triggerProvider": "Cognito"
-        }
-      ],
+      "dependsOn": [],
       "frontendAuthConfig": {
         "mfaConfiguration": "OFF",
         "mfaTypes": [
           "SMS"
         ],
         "passwordProtectionSettings": {
-          "passwordPolicyCharacters": [],
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_UPPERCASE",
+            "REQUIRES_NUMBERS"
+          ],
           "passwordPolicyMinLength": 8
         },
         "signupAttributes": [
           "BIRTHDATE",
+          "EMAIL",
           "GENDER",
           "PREFERRED_USERNAME"
         ],
         "socialProviders": [],
         "usernameAttributes": [],
-        "verificationMechanisms": []
+        "verificationMechanisms": [
+          "PHONE_NUMBER"
+        ]
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
     }
   },
   "function": {
-    "tdhvacooksocial68f63ad968f63ad9PostConfirmation": {
+    "tdhvacooksocial1e12d363PostConfirmation": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
-  "hosting": {
-    "S3AndCloudFront": {
-      "providerPlugin": "awscloudformation",
-      "service": "S3AndCloudFront"
-    }
-  },
   "parameters": {
-    "AMPLIFY_function_tdhvacooksocial68f63ad968f63ad9PostConfirmation_deploymentBucketName": {
+    "AMPLIFY_function_tdhvacooksocial1e12d363PostConfirmation_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "tdhvacooksocial68f63ad968f63ad9PostConfirmation"
+          "resourceName": "tdhvacooksocial1e12d363PostConfirmation"
         }
       ]
     },
-    "AMPLIFY_function_tdhvacooksocial68f63ad968f63ad9PostConfirmation_s3Key": {
+    "AMPLIFY_function_tdhvacooksocial1e12d363PostConfirmation_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "tdhvacooksocial68f63ad968f63ad9PostConfirmation"
+          "resourceName": "tdhvacooksocial1e12d363PostConfirmation"
         }
       ]
-    }
-  },
-  "storage": {
-    "UserProfiles": {
-      "providerPlugin": "awscloudformation",
-      "service": "DynamoDB"
     }
   }
 }

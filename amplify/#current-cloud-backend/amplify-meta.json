@@ -9,125 +9,84 @@
       "UnauthRoleName": "amplify-tdhvacooksocial-dev-6366a-unauthRole",
       "StackName": "amplify-tdhvacooksocial-dev-6366a",
       "StackId": "arn:aws:cloudformation:us-east-1:285956107606:stack/amplify-tdhvacooksocial-dev-6366a/14a079c0-97c8-11f0-8bc3-123b12743a4d",
-      "AmplifyAppId": "d3o8vkwlr78vn2",
-      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-tdhvacooksocial-dev-6366a-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+      "AmplifyAppId": "d3o8vkwlr78vn2"
     }
   },
   "auth": {
-    "tdhvacooksocial68f63ad968f63ad9": {
+    "tdhvacooksocial": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "tdhvacooksocial68f63ad968f63ad9PostConfirmation",
-          "triggerProvider": "Cognito",
-          "attributes": [
-            "Arn",
-            "Name"
-          ]
-        }
-      ],
+      "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
         "socialProviders": [],
         "usernameAttributes": [],
         "signupAttributes": [
           "BIRTHDATE",
+          "EMAIL",
           "GENDER",
           "PREFERRED_USERNAME"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_UPPERCASE",
+            "REQUIRES_NUMBERS"
+          ]
         },
         "mfaConfiguration": "OFF",
         "mfaTypes": [
           "SMS"
         ],
-        "verificationMechanisms": []
+        "verificationMechanisms": [
+          "PHONE_NUMBER"
+        ]
       },
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-tdhvacooksocial-dev-6366a-deployment/amplify-cfn-templates/auth/tdhvacooksocial68f63ad968f63ad9-cloudformation-template.json",
-        "logicalId": "authtdhvacooksocial68f63ad968f63ad9"
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-tdhvacooksocial-dev-6366a-deployment/amplify-cfn-templates/auth/tdhvacooksocial-cloudformation-template.json",
+        "logicalId": "authtdhvacooksocial"
       },
-      "lastPushTimeStamp": "2025-09-22T17:45:34.877Z",
+      "lastPushTimeStamp": "2025-09-22T21:25:40.090Z",
       "output": {
-        "UserPoolId": "us-east-1_h977IACjz",
-        "AppClientIDWeb": "4v66hnomtqvg5l0endqvpgvdo3",
-        "AppClientID": "5rsuc72mbolmntfeieq8aou26u",
-        "IdentityPoolId": "us-east-1:6cb9afcf-f434-4fd4-982a-95e0a00f47c8",
-        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:285956107606:userpool/us-east-1_h977IACjz",
-        "IdentityPoolName": "tdhvacooksocial68f63ad9_identitypool_68f63ad9__dev",
-        "UserPoolName": "tdhvacooksocial68f63ad9_userpool_68f63ad9"
-      }
+        "CreatedSNSRole": "arn:aws:iam::285956107606:role/snsfaffc7946366a-dev",
+        "UserPoolId": "us-east-1_05QWno1y2",
+        "AppClientIDWeb": "2sgedgl39qhtf9hs7crnrdcua6",
+        "AppClientID": "76jl1rulvbfdgi9o1pot67efhu",
+        "IdentityPoolId": "us-east-1:11dc4ac2-c886-4edd-b7b3-160bc298df2b",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:285956107606:userpool/us-east-1_05QWno1y2",
+        "IdentityPoolName": "tdhvacooksocial__dev",
+        "UserPoolName": "tdhvacooksocial"
+      },
+      "lastPushDirHash": "sF2ZmsTT3QRVXsSm2qvc33cg1mA="
     }
   },
   "function": {
-    "tdhvacooksocial68f63ad968f63ad9PostConfirmation": {
+    "tdhvacooksocial1e12d363PostConfirmation": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
-      "lastBuildTimeStamp": "2025-09-22T17:43:59.023Z",
+      "lastBuildTimeStamp": "2025-09-22T16:31:42.998Z",
       "lastBuildType": "PROD",
-      "lastPackageTimeStamp": "2025-09-22T17:44:01.078Z",
-      "distZipFilename": "tdhvacooksocial68f63ad968f63ad9PostConfirmation-4455626b70316f667458-build.zip",
+      "lastPackageTimeStamp": "2025-09-22T16:31:43.269Z",
+      "distZipFilename": "tdhvacooksocial1e12d363PostConfirmation-666e7559646d67336651-build.zip",
       "s3Bucket": {
         "deploymentBucketName": "amplify-tdhvacooksocial-dev-6366a-deployment",
-        "s3Key": "amplify-builds/tdhvacooksocial68f63ad968f63ad9PostConfirmation-4455626b70316f667458-build.zip"
+        "s3Key": "amplify-builds/tdhvacooksocial1e12d363PostConfirmation-666e7559646d67336651-build.zip"
       },
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-tdhvacooksocial-dev-6366a-deployment/amplify-cfn-templates/function/tdhvacooksocial68f63ad968f63ad9PostConfirmation-cloudformation-template.json",
-        "logicalId": "functiontdhvacooksocial68f63ad968f63ad9PostConfirmation"
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-tdhvacooksocial-dev-6366a-deployment/amplify-cfn-templates/function/tdhvacooksocial1e12d363PostConfirmation-cloudformation-template.json",
+        "logicalId": "functiontdhvacooksocial1e12d363PostConfirmation"
       },
-      "lastPushTimeStamp": "2025-09-22T17:45:34.879Z",
+      "lastPushTimeStamp": "2025-09-22T21:25:35.382Z",
       "output": {
-        "LambdaExecutionRoleArn": "arn:aws:iam::285956107606:role/tdhvacooksocial68f63ad968f63ad9PostConfirmation-dev",
+        "LambdaExecutionRoleArn": "arn:aws:iam::285956107606:role/tdhvacooksocial1e12d363PostConfirmation-dev",
         "Region": "us-east-1",
-        "Arn": "arn:aws:lambda:us-east-1:285956107606:function:tdhvacooksocial68f63ad968f63ad9PostConfirmation-dev",
-        "Name": "tdhvacooksocial68f63ad968f63ad9PostConfirmation-dev",
-        "LambdaExecutionRole": "tdhvacooksocial68f63ad968f63ad9PostConfirmation-dev"
-      }
-    }
-  },
-  "storage": {
-    "UserProfiles": {
-      "service": "DynamoDB",
-      "providerPlugin": "awscloudformation",
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-tdhvacooksocial-dev-6366a-deployment/amplify-cfn-templates/storage/UserProfiles-cloudformation-template.json",
-        "logicalId": "storageUserProfiles"
+        "Arn": "arn:aws:lambda:us-east-1:285956107606:function:tdhvacooksocial1e12d363PostConfirmation-dev",
+        "Name": "tdhvacooksocial1e12d363PostConfirmation-dev",
+        "LambdaExecutionRole": "tdhvacooksocial1e12d363PostConfirmation-dev"
       },
-      "lastPushTimeStamp": "2025-09-22T17:45:34.880Z",
-      "output": {
-        "PartitionKeyName": "userId",
-        "Region": "us-east-1",
-        "Arn": "arn:aws:dynamodb:us-east-1:285956107606:table/UserProfiles-dev",
-        "StreamArn": "arn:aws:dynamodb:us-east-1:285956107606:table/UserProfiles-dev/stream/2025-09-22T17:02:39.504",
-        "PartitionKeyType": "S",
-        "Name": "UserProfiles-dev"
-      }
-    }
-  },
-  "hosting": {
-    "S3AndCloudFront": {
-      "service": "S3AndCloudFront",
-      "providerPlugin": "awscloudformation",
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-tdhvacooksocial-dev-6366a-deployment/amplify-cfn-templates/hosting/template.json",
-        "logicalId": "hostingS3AndCloudFront"
-      },
-      "lastPushTimeStamp": "2025-09-22T17:45:34.880Z",
-      "output": {
-        "CloudFrontSecureURL": "https://d2ovxpyl6b7ihm.cloudfront.net",
-        "S3BucketSecureURL": "https://tdhvacooksocial-dev.s3.amazonaws.com",
-        "CloudFrontOriginAccessIdentity": "EKXLSV4VMFTCH",
-        "WebsiteURL": "http://tdhvacooksocial-dev.s3-website-us-east-1.amazonaws.com",
-        "CloudFrontDistributionID": "E17TKYSG17U60N",
-        "Region": "us-east-1",
-        "HostingBucketName": "tdhvacooksocial-dev",
-        "CloudFrontDomainName": "d2ovxpyl6b7ihm.cloudfront.net"
-      }
+      "lastPushDirHash": "8nnEHKujwITyNPf9iUPzIFg6tyc="
     }
   }
 }
