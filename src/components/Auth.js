@@ -1,137 +1,149 @@
 import React, { useState } from 'react';
-import { signUp } from 'aws-amplify/auth';
-import countries from '../data/countries.json';
 
-function Auth() {
+const Auth = ({ onSuccess }) => {
+  const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     username: '',
-    password: '',
     email: '',
-    birthdate: '',
-    gender: '',
-    nationality: '',
-    allergies: ''
+    password: ''
   });
+  const [loading, setLoading] = useState(false);
 
-  // Input sanitization function
-  const sanitizeInput = (input) => {
-    if (typeof input !== 'string') return '';
-    return input.replace(/[<>"'&]/g, '').trim();
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
-  // Validate input fields
-  const validateForm = () => {
-    if (!formData.username || !formData.password || !formData.birthdate || !formData.gender) {
-      alert('Please fill in all required fields');
-      return false;
-    }
-    if (formData.username.length < 3) {
-      alert('Username must be at least 3 characters');
-      return false;
-    }
-    if (formData.password.length < 8) {
-      alert('Password must be at least 8 characters');
-      return false;
-    }
-    return true;
-  };
-
-
-  const handleSignUp = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (!validateForm()) return;
-    
+    setLoading(true);
+
     try {
-      const sanitizedData = {
-        username: sanitizeInput(formData.username),
-        password: formData.password, // Don't sanitize password
-        email: sanitizeInput(formData.email),
-        birthdate: formData.birthdate,
-        gender: formData.gender,
-        nationality: formData.nationality,
-        allergies: sanitizeInput(formData.allergies)
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      const userData = {
+        username: formData.username || formData.email.split('@')[0],
+        email: formData.email
       };
       
-      const { user } = await signUp({
-        username: sanitizedData.username,
-        password: sanitizedData.password,
-        attributes: {
-          email: sanitizedData.email,
-          birthdate: sanitizedData.birthdate,
-          gender: sanitizedData.gender,
-          preferred_username: sanitizedData.username,
-          'custom:nationality': sanitizedData.nationality,
-          'custom:allergies': sanitizedData.allergies
-        }
-      });
-      console.log('Sign up success:', user);
-      alert('Sign up successful!');
+      onSuccess(userData);
     } catch (error) {
-      console.error('Sign up error:', error);
-      alert('Sign up failed: ' + error.message);
+      alert('Đã xảy ra lỗi khi đăng nhập. Vui lòng thử lại.');
+    } finally {
+      setLoading(false);
     }
   };
 
-
-
-
-
   return (
-    <div style={{ padding: '20px', maxWidth: '400px' }}>
-      <h2>TDH Cook Social</h2>
-      <form onSubmit={handleSignUp}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={formData.username}
-          onChange={(e) => setFormData({...formData, username: e.target.value})}
-          required
-          style={{ display: 'block', margin: '10px 0', padding: '8px', width: '100%' }}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={(e) => setFormData({...formData, password: e.target.value})}
-          required
-          style={{ display: 'block', margin: '10px 0', padding: '8px', width: '100%' }}
-        />
-        <input
-          type="date"
-          value={formData.birthdate}
-          onChange={(e) => setFormData({...formData, birthdate: e.target.value})}
-          required
-          style={{ display: 'block', margin: '10px 0', padding: '8px', width: '100%' }}
-        />
-        <select
-          value={formData.gender}
-          onChange={(e) => setFormData({...formData, gender: e.target.value})}
-          required
-          style={{ display: 'block', margin: '10px 0', padding: '8px', width: '100%' }}
+    <div className="w-full max-w-md">
+      <div className="mb-6 text-center">
+        <div className="flex justify-center bg-gray-100 rounded-lg p-1 mb-4">
+          <button
+            onClick={() => setIsLogin(true)}
+            className={`flex-1 px-4 py-2 rounded-md font-medium transition-all ${
+              isLogin 
+                ? 'bg-white text-amber-700 shadow-sm' 
+                : 'text-gray-600 hover:text-amber-600'
+            }`}
+          >
+            Đăng nhập
+          </button>
+          <button
+            onClick={() => setIsLogin(false)}
+            className={`flex-1 px-4 py-2 rounded-md font-medium transition-all ${
+              !isLogin 
+                ? 'bg-white text-amber-700 shadow-sm' 
+                : 'text-gray-600 hover:text-amber-600'
+            }`}
+          >
+            Đăng ký
+          </button>
+        </div>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {!isLogin && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Tên người dùng
+            </label>
+            <input
+              type="text"
+              name="username"
+              placeholder="Nhập tên người dùng"
+              value={formData.username}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              required={!isLogin}
+            />
+          </div>
+        )}
+        
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Nhập địa chỉ email"
+            value={formData.email}
+            onChange={handleInputChange}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+            required
+          />
+        </div>
+        
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Mật khẩu
+          </label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Nhập mật khẩu"
+            value={formData.password}
+            onChange={handleInputChange}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-gradient-to-r from-amber-600 to-orange-600 text-white py-3 rounded-lg font-semibold hover:from-amber-700 hover:to-orange-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
         >
-          <option value="">Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-        <select
-          value={formData.nationality}
-          onChange={(e) => setFormData({...formData, nationality: e.target.value})}
-          style={{ display: 'block', margin: '10px 0', padding: '8px', width: '100%' }}
-        >
-          <option value="">Nationality (optional)</option>
-          {countries.map(country => (
-            <option key={country.code} value={country.code}>
-              {country.name}
-            </option>
-          ))}
-        </select>
-        <button type="submit" style={{ padding: '10px 20px', margin: '10px 0' }}>
-          Sign Up
+          {loading ? (
+            <div className="flex items-center justify-center space-x-2">
+              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              <span>Đang xử lý...</span>
+            </div>
+          ) : (
+            isLogin ? 'Đăng nhập' : 'Đăng ký'
+          )}
         </button>
       </form>
+
+      <div className="mt-6 text-center">
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+          <p className="text-sm text-amber-700">
+            <span className="font-medium">Demo mode:</span> Nhập bất kỳ email/password nào để tiếp tục
+          </p>
+        </div>
+      </div>
+
+      {isLogin && (
+        <div className="mt-4 text-center">
+          <button className="text-sm text-amber-600 hover:text-amber-700">
+            Quên mật khẩu?
+          </button>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default Auth;
