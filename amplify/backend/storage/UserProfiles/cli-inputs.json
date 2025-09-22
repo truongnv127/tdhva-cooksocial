@@ -1,0 +1,10 @@
+{
+  "resourceName": "UserProfiles",
+  "tableName": "UserProfiles",
+  "partitionKey": {
+    "fieldName": "userId",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

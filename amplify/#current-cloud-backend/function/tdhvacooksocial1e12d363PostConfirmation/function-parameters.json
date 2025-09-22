@@ -1,0 +1,16 @@
+{
+  "trigger": true,
+  "modules": [
+    "custom"
+  ],
+  "parentResource": "tdhvacooksocial1e12d363",
+  "functionName": "tdhvacooksocial1e12d363PostConfirmation",
+  "resourceName": "tdhvacooksocial1e12d363PostConfirmation",
+  "parentStack": "auth",
+  "triggerEnvs": "[]",
+  "triggerDir": "/snapshot/amplify-cli/build/node_modules/@aws-amplify/amplify-category-auth/provider-utils/awscloudformation/triggers/PostConfirmation",
+  "triggerTemplate": "PostConfirmation.json.ejs",
+  "triggerEventPath": "PostConfirmation.event.json",
+  "roleName": "tdhvacooksocial1e12d363PostConfirmation",
+  "skipEdit": true
+}
